@@ -6,7 +6,7 @@ export const checkRoute = async (req, res, next) => {
         const token = req.cookies.jwt;
 
         if(!token){
-            return res.status(401).json({message:"Unauthorised token"})
+            return res.status(401).json({message:"Unauthorised token-not able to login"})
         }
         const decode = jwt.verify(token,process.env.jwt_secret);
         
