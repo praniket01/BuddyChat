@@ -97,3 +97,38 @@ export async function acceptFriendRequest(req,res){
         console.log("Error while accepting friend req ",error);
     }
 }
+
+export async function getFriendRequests(req,res) {
+    try {
+        const increq = await FriendRequest.find({
+            recipient : req.user.id,
+            status: "pending",
+
+        }).populate("sender","fullname profilepic nativelanguage learninglanguage");
+    
+        const acceptedReq = await FriendRequest.find({
+            sender : req.user.id,
+            status: "accepted",
+
+        }).populate("recipient","fullname profilepic");
+    
+        res.status(200).json({increq,acceptedReq});
+
+    } catch (error) {
+        console.log("Error in getFriendRequest", error);
+    }
+    
+}
+
+export async function getFriendRequestSent(req,res) {
+    try {
+        const outgoingReq = await FriendRequest.find({
+            sender : req.user.id,
+            status : "pending"
+        }).populate("recipient","fullname profilepic nativelanguage learninglanguage")
+        res.status(200).json(outgoingReq);
+
+    } catch (error) {
+        console.log("Error in GetFriendRequestsent",error);
+    }
+}
