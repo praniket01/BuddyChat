@@ -26,7 +26,7 @@ export async function signup(req, res) {
             return res.status(400).json({ message: "Email already used. Please use different email" });
 
         const randomindex = Math.floor(Math.random() * 150) + 1;
-        const profilePic = `https://multiavatar.com/Neurostatic/${randomindex}.png`;
+        const profilePic = `https://avatar.iran.liara.run/public/${randomindex}.png`;
 
         const newUser = await user.create({
             email,
