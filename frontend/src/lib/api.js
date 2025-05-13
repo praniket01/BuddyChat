@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import { axioInstance } from "./axios.js";
 
 export const signUp = async (signupData) => {
@@ -7,8 +7,12 @@ export const signUp = async (signupData) => {
 }
 
 export const authUser = async () => {
-  const res = await axioInstance.get("/auth/me");
-  return res.data;
+  try {
+    const res = await axioInstance.get("/auth/me");
+    return res.data;
+  } catch (error) {
+    return null;                                 
+  }
 }
 
 
@@ -19,5 +23,12 @@ export const completeOnboarding = async (userData) => {
 
 export const login = async (loginData) => {
   const res = await axioInstance.post("/auth/login", loginData);
+  return res.data;
+}
+
+
+export const logout = async () => {
+  const res = await axioInstance.post("/auth/logout");
+
   return res.data;
 }
