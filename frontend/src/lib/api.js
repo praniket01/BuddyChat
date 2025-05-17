@@ -32,3 +32,38 @@ export const logout = async () => {
 
   return res.data;
 }
+
+export const getOutgoingFriendReq = async  () => {
+  const res = await axioInstance.get("/users/friend-request-sent");
+  return res.data;
+}
+
+
+export const getRecommendedUsers = async () => {
+  const res = await axioInstance.get("/users");
+  return res.data;
+}
+
+
+export const getFreindReq = async () => {
+  const res = await axioInstance.get(`/users/friend-requests`)
+  return res.data;
+}
+
+
+export const sendFriendReq = async (userId) => {
+ const res = await axioInstance.post(`/users/friend-request/${userId}`);
+ return res.data;
+}
+
+export async function getUserFriends() {
+  const res = await axioInstance.get("/users/friends");
+  return res.data;
+}
+
+export async function getStreamToken(){
+  const res = await axioInstance.get('/chat/token');
+  return res.data;
+
+}
+
