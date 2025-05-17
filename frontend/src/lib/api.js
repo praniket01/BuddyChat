@@ -56,6 +56,12 @@ export const sendFriendReq = async (userId) => {
  return res.data;
 }
 
+export const acceptFriendReqs = async (reqId) => {
+ const res = await axioInstance.put(`/users/friend-request/${reqId}/accept`);
+ return res.data;
+}
+
+
 export async function getUserFriends() {
   const res = await axioInstance.get("/users/friends");
   return res.data;
@@ -66,4 +72,3 @@ export async function getStreamToken(){
   return res.data;
 
 }
-

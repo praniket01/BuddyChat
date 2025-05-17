@@ -11,12 +11,10 @@ import {
   Chat,
   MessageInput,
   MessageList,
-  Thread,
   Window
 
 } from "stream-chat-react";
 import { StreamChat } from "stream-chat";
-import { Wind } from "lucide-react";
 
 
 const ChatPage = () => {
@@ -33,23 +31,22 @@ const ChatPage = () => {
     enabled : !!authUser
   })
 
-  useEffect(() => {
+ const Stream_API_Key = import.meta.env.VITE_STREAM_API_KEY;
+ useEffect(() => {
     const initChat = async () => {
       if(!tokenData?.data || !authUser){
         return;
       }
 
       try {
-        console.log("initializing Stream Chat");
-
-         const client = StreamChat.getInstance(process.env.VITE_STREAM_API_KEY);
+        const client = StreamChat.getInstance(Stream_API_Key);
         await client.connectUser({
-          id : authUser.id,
+          id : authUser._id,
           name : authUser.fullname,
           image : authUser.profilepic,
 
 
-        },tokenData.token)
+        },tokenData.data)
 
         const channelId = [authUser._id, destinationUserId].sort().join("-");
 
