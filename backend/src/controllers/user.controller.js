@@ -89,7 +89,7 @@ export async function acceptFriendRequest(req, res) {
             $addToSet: { friends: friendReq.recipient }
         })
         await user.findByIdAndUpdate(friendReq.recipient, {
-            $addToSet: { friends: friendReq.recipient }
+            $addToSet: { friends: friendReq.sender }
         });
 
         res.status(200).json({ message: "Friend request accepted" });
